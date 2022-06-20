@@ -5,8 +5,13 @@ with open('webpage.html', 'r') as html_file:
     content = html_file.read()  # the contents of the instance of the file is read into contents
     # Prints the contents:  print(content)
     soup = BeautifulSoup(content, 'html.parser')  # Instance as a soup with html parser
-    tags = soup.find_all('h5')  # Finds all the tags with h5 and prints. if we use only find instad of find_all,
-    # only the first instance of h5 will be printed
-    for courses in tags:
-          print(courses.text)  # instead of the whole html line, only the text of those html lines are printed
-          
+    course_cards = soup.find_all('div', class_='card')  # fetching div cards with class names as card
+    for course in course_cards:
+        course_name = course.h5.text
+        course_price = course.a.text.split()[-1]
+
+        print(f'{course_name} costs {course_price}')
+
+
+
+
