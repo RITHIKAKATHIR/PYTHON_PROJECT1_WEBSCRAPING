@@ -1,0 +1,26 @@
+from bs4 import BeautifulSoup
+import requests
+
+# requesting informing from the website with the help of 'requests'
+
+# html_text = requests.get('https://www.timesjobs.com/candidate/job-search. html?searchType=personalizedSearch&from'
+# '=submit&txtKeywords=python&txtLocation=')
+
+# print(html_text)
+
+
+# if u run just line 5 and 7 the console prints response
+# 200 meaning request is accepted but we want the html code of page so we modify this
+
+
+html_text = requests.get('https://www.timesjobs.com/candidate/job-search. html?searchType=personalizedSearch&from'
+                         '=submit&txtKeywords=python&txtLocation=').text
+# print(html_text)
+
+# this pull the html code and print tht in the console
+
+soup = BeautifulSoup(html_text, 'html.parser')
+
+jobs = soup.find_all('li', class_='clearfix job-bx wht-shd-bx')
+
+print(jobs)
